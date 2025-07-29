@@ -10,7 +10,7 @@ const cookieOptions = {
 };
 
 export const AuthService = {
-    async login(data: AuthDto) {
+    async signin(data: AuthDto) {
         const response = await fetch(`${API_URL}/auth/signin`, {
             method: "POST",
             headers: {
@@ -23,10 +23,13 @@ export const AuthService = {
             throw new Error("Erro ao fazer login")
         }
 
+        const token: string = (await response.json()).token;
+
+        Cookies.set("token", token, cookieOptions);
         return await response.json()
     },
 
-    async register(data: CreateUserDto) {
+    async signup(data: CreateUserDto) {
         const response = await fetch(`${API_URL}/auth/signup`, {
             method: "POST",
             headers: {
