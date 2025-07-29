@@ -1,4 +1,4 @@
-import { Home, Inbox } from "lucide-react"
+import { LogOut, MapPin, User } from "lucide-react"
 import { useLocation } from "react-router-dom"
 
 import {
@@ -12,22 +12,29 @@ import {
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
-// Menu items.
+const handleLogout = () => {
+    console.log("Logging out...");
+}
+
 const items = [
     {
         title: "Address",
         url: "/",
-        icon: Home,
+        icon: MapPin,
     },
     {
         title: "Profile",
         url: "/profile",
-        icon: Inbox,
+        icon: User,
+    },
+    {
+        title: "Exit",
+        onClick: handleLogout,
+        icon: LogOut,
     }
 ]
 
 export function AppSidebar() {
-    // Função para verificar se estamos dentro de um Router
     const useLocationSafe = () => {
         try {
             return useLocation()
@@ -42,13 +49,14 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel>Solution App</SidebarGroupLabel>
                     <SidebarGroupContent>
+
                         <SidebarMenu>
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
-                                    <SidebarMenuButton asChild isActive={location.pathname === item.url}>
-                                        <a href={item.url}>
+                                    <SidebarMenuButton asChild isActive={location.pathname === item.url} onClick={item.onClick}>
+                                        <a href={item.url} style={{ cursor: "pointer" }}>
                                             <item.icon />
                                             <span>{item.title}</span>
                                         </a>
