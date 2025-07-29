@@ -1,15 +1,14 @@
-
 import './App.css'
 import { ThemeProvider } from './components/theme-provider'
 import { AppRoutes } from './routes'
 
 function App() {
   return (
-    <>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <div className=" bg-background text-foreground">
         <AppRoutes />
-      </ThemeProvider>
-    </>
+      </div>
+    </ThemeProvider>
   )
 }
 
