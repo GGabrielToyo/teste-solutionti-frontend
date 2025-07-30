@@ -1,14 +1,17 @@
 import './App.css'
 import { ThemeProvider } from './components/theme-provider'
+import { AuthProvider } from './contexts/AuthProvider'
 import { AppRoutes } from './routes'
 
 function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <div className=" bg-background text-foreground">
-        <AppRoutes />
-      </div>
-    </ThemeProvider>
+            <AuthProvider>
+                <div className="min-h-screen bg-background text-foreground">
+                    <AppRoutes />
+                </div>
+            </AuthProvider>
+        </ThemeProvider>
   )
 }
 

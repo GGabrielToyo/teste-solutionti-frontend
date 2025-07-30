@@ -4,29 +4,31 @@ import Layout from "../layout"
 import Auth from "../pages/Auth"
 import Page from "@/pages/dashboard/page";
 import Profile from "@/pages/Profile";
+import { ProtectedRoute } from "./ProtectedRoute";
+
+function PrivateRoutes() {
+    return (
+        <Layout>
+            <Routes>
+                <Route path="/" element={<Page />} />
+                <Route path="/profile" element={<Profile />} />
+            </Routes>
+        </Layout>
+    )
+}
 
 export function AppRoutes() {
     return (
         <Router>
             <Routes>
-                {/* Rota pública - Página de autenticação */}
                 <Route path="/auth" element={<Auth />} />
 
-                {/* Rota principal - Dashboard com sidebar */}
                 <Route
-                    path="/"
+                    path="/*"
                     element={
-                        <Layout>
-                            <Page />
-                        </Layout>
-                    }
-                />
-                <Route
-                    path="/profile"
-                    element={
-                        <Layout>
-                            <Profile />
-                        </Layout>
+                        <ProtectedRoute>
+                            <PrivateRoutes />
+                        </ProtectedRoute>
                     }
                 />
             </Routes>

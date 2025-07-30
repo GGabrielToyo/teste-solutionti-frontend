@@ -1,13 +1,8 @@
 import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface"
-import Cookies from "js-cookie";
+
+import { TokenService } from "./token-service";
 
 const API_URL = import.meta.env.VITE_API_URL;
-
-const cookieOptions = {
-    expires: 1,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "Strict" as const,
-};
 
 export const AuthService = {
     async signin(data: AuthDto) {
@@ -25,7 +20,7 @@ export const AuthService = {
 
         const token: string = (await response.json()).token;
 
-        Cookies.set("token", token, cookieOptions);
+        TokenService.setToken(token);
         return await response.json()
     },
 
