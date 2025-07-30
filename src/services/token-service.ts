@@ -9,7 +9,7 @@ const cookieOptions = {
 
 export const TokenService = {
     setToken(token: string) {
-        Cookies.set("TOKEN_KEY", token, cookieOptions);
+        Cookies.set(TOKEN_KEY, token, cookieOptions);
     },
 
     getToken(): string | undefined {

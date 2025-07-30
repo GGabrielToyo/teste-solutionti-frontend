@@ -1,47 +1,31 @@
 import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface"
+import { api } from "@/lib/axios";
 
 import { TokenService } from "./token-service";
-
-const API_URL = import.meta.env.VITE_API_URL;
 
 export const AuthService = {
 
     async signin(data: AuthDto) {
-        const response = await fetch(`${API_URL}/auth/signin`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
+        const response = await api.post("/auth/signin", data);
 
-        if (!response.ok) {
-            const errorText = await response.text(); // pega o erro como texto
-            console.error("Erro:", errorText);
-            throw new Error("Erro ao fazer login");
+        const token = response.data.token;
+
+        if (!token) {
+            throw new Error("Token não recebido");
         }
 
-        //const token: string = (await response.json()).token;
-        //TokenService.setToken(token);
-        console.log(await response.json());
+        TokenService.setToken(token);
 
-        return await response.json()
+        return response.data;
     },
 
     async signup(data: CreateUserDto) {
-        const response = await fetch(`${API_URL}/auth/signup`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
+        const response = await api.post("/auth/signup", data);
 
-        if (!response.ok) {
-            throw new Error("Erro ao registrar usuário")
+        if (!response.data) {
+            throw new Error("Erro ao registrar usuário");
         }
 
-        return await response.json()
+        return response.data;
     },
 }

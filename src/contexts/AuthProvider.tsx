@@ -3,7 +3,10 @@ import { AuthContext } from "./AuthContext"
 import { TokenService } from "@/services/token-service"
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const token = TokenService.getToken()
+        return !!token
+    })
 
     useEffect(() => {
         const token = TokenService.getToken()
