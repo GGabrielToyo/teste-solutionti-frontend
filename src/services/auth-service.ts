@@ -1,4 +1,4 @@
-import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface"
+import type { AuthDto, CreateUserDto, UserDto } from "@/interfaces/user-interface"
 import { api } from "@/lib/axios";
 
 import { TokenService } from "./token-service";
@@ -22,10 +22,12 @@ export const AuthService = {
     async signup(data: CreateUserDto) {
         const response = await api.post("/auth/signup", data);
 
-        if (!response.data) {
+        const userDto: UserDto = response.data;
+
+        if (!userDto) {
             throw new Error("Erro ao registrar usuário");
         }
 
-        return response.data;
+        return userDto;
     },
 }

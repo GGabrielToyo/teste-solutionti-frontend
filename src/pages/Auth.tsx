@@ -4,13 +4,14 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDocumentTitle } from "@/hooks/use-document-title";
-import { z } from "zod"
+import { set, z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface";
+import type { AuthDto, CreateUserDto, UserDto } from "@/interfaces/user-interface";
 import { AuthService } from "@/services/auth-service";
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from "@/hooks/use-auth";
+import { useState } from "react";
 
 const signinSchema = z.object({
     email: z
@@ -55,12 +56,14 @@ type SignupForm = z.infer<typeof signupSchema>
 export default function Auth() {
     useDocumentTitle("App - Auth")
     const navigate = useNavigate()
-    const {login} = useAuth()
+    const { login } = useAuth()
+    const [activeTab, setActiveTab] = useState("signin")
 
     const {
         register,
         handleSubmit,
         reset,
+        setValue,
         formState: { errors, isSubmitting, isValid }
     } = useForm<SigninForm>({
         resolver: zodResolver(signinSchema),
@@ -114,9 +117,13 @@ export default function Auth() {
                 passwordConfirmation: data.confirmPassword
             }
 
-            AuthService.signup(signupDto)
+            await AuthService.signup(signupDto)
             resetSignup()
-
+            setActiveTab("signin")
+            setValue("email", signupDto.email)
+            setTimeout(() => {
+                document.getElementById("password")?.focus()
+            }, 100)
         } catch (error) {
             console.error("Erro no cadastro:", error)
         }
@@ -129,7 +136,7 @@ export default function Auth() {
                     <h1 className="text-3xl font-bold mb-2 text-foreground">Sistema de Endereços</h1>
                     <p className="text-muted-foreground">Gerencie seus endereços de forma simples e eficiente.</p>
                 </div>
-                <Tabs defaultValue="signin">
+                <Tabs value={activeTab} onValueChange={setActiveTab}>
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="signin">Entrar</TabsTrigger>
                         <TabsTrigger value="signup">Cadastrar</TabsTrigger>
