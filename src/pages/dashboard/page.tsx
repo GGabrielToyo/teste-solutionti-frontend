@@ -38,7 +38,7 @@ export default function Page() {
         <div className="container mx-auto py-10 bg-background text-foreground">
             {loading && (
                 <div>
-                    Carregando...
+                    Carregando endereços...
                     <Skeleton className="w-full h-25 rounded-md bg-gray-300 mt-5" />
                 </div>
             )}
