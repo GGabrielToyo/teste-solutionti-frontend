@@ -1,3 +1,4 @@
+import type { Pageable, Sort } from "./pageable-interface";
 import type { UserDto } from "./user-interface";
 
 export interface AddressDto {
@@ -39,4 +40,18 @@ export interface UpdateAddressDto {
     giaCode: string,
     areaCode: string,
     siafiCode: string
+}
+
+export interface AddressDtoList {
+    totalPages: number;
+    totalElements: number;
+    size: number;
+    content: AddressDto[];
+    number: number;
+    sort: Sort;
+    pageable: Pageable;
+    numberOfElements: number;
+    first: boolean;
+    last: boolean;
+    empty: boolean;
 }

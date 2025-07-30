@@ -1,20 +1,11 @@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import type { AddressDto } from "@/interfaces/address-interface"
 import type { ColumnDef } from "@tanstack/react-table"
 import { ArrowUpDown, MoreHorizontal } from "lucide-react"
 
-
-export type Address = {
-    id: string,
-    street: string,
-    city: string,
-    region: string,
-    userName: string,
-    userCPF: string,
-}
-
-export const columns: ColumnDef<Address>[] = [
+export const columns: ColumnDef<AddressDto>[] = [
     {
         id: "select",
         header: ({ table }) => (
@@ -70,14 +61,14 @@ export const columns: ColumnDef<Address>[] = [
         accessorKey: "userName",
         header: "Name",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("userName")}</div>
+            <div className="capitalize">{row.original.user.name}</div>
         ),
     },
     {
         accessorKey: "userCPF",
         header: "CPF",
         cell: ({ row }) => (
-            <div className="capitalize">{row.getValue("userCPF")}</div>
+            <div className="capitalize">{row.original.user.cpf}</div>
         ),
     },
     {
