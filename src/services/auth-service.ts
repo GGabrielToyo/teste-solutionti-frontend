@@ -5,22 +5,27 @@ import { TokenService } from "./token-service";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const AuthService = {
+
     async signin(data: AuthDto) {
         const response = await fetch(`${API_URL}/auth/signin`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Accept": "application/json",
             },
             body: JSON.stringify(data),
         })
 
         if (!response.ok) {
-            throw new Error("Erro ao fazer login")
+            const errorText = await response.text(); // pega o erro como texto
+            console.error("Erro:", errorText);
+            throw new Error("Erro ao fazer login");
         }
 
-        const token: string = (await response.json()).token;
+        //const token: string = (await response.json()).token;
+        //TokenService.setToken(token);
+        console.log(await response.json());
 
-        TokenService.setToken(token);
         return await response.json()
     },
 

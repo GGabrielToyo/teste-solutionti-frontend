@@ -8,6 +8,7 @@ import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface";
+import { AuthService } from "@/services/auth-service";
 
 const signinSchema = z.object({
     email: z
@@ -90,7 +91,8 @@ export default function Auth() {
                 password: data.password
             }
 
-            console.log(authDto)
+            await AuthService.signin(authDto)
+
             reset()
 
         } catch (error) {
@@ -108,7 +110,7 @@ export default function Auth() {
                 passwordConfirmation: data.confirmPassword
             }
 
-            console.log("Dados de cadastro:", signupDto)
+            AuthService.signup(signupDto)
             resetSignup()
 
         } catch (error) {
