@@ -20,11 +20,10 @@ export default function Page() {
                 setError(null)
                 const response: AddressDtoList = await AddressService.getAddress()
 
-                console.log("Endereços encontrados:", response.content)
                 setAddresses(response.content)
                 setTimeout(() => {
                     setLoading(false)
-                }, 2000) // Simulate a delay for loading
+                }, 2000)
 
             } catch (error) {
                 console.error("Erro ao buscar endereços:", error)
@@ -39,7 +38,8 @@ export default function Page() {
         <div className="container mx-auto py-10 bg-background text-foreground">
             {loading && (
                 <div>
-                    <Skeleton className="w-full h-10 rounded-full" />
+                    Carregando...
+                    <Skeleton className="w-full h-25 rounded-md bg-gray-300 mt-5" />
                 </div>
             )}
 
