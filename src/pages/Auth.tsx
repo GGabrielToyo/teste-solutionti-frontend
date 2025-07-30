@@ -9,6 +9,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface";
 import { AuthService } from "@/services/auth-service";
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from "@/hooks/use-auth";
 
 const signinSchema = z.object({
     email: z
@@ -52,6 +54,8 @@ type SignupForm = z.infer<typeof signupSchema>
 
 export default function Auth() {
     useDocumentTitle("App - Auth")
+    const navigate = useNavigate()
+    const {login} = useAuth()
 
     const {
         register,
@@ -91,10 +95,10 @@ export default function Auth() {
                 password: data.password
             }
 
-            await AuthService.signin(authDto)
-
+            const response = await AuthService.signin(authDto)
+            login(response.data.token)
+            navigate('/')
             reset()
-
         } catch (error) {
             console.error("Erro no login:", error)
         }

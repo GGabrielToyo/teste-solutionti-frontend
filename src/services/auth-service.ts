@@ -16,7 +16,7 @@ export const AuthService = {
 
         TokenService.setToken(token);
 
-        return response.data;
+        return response;
     },
 
     async signup(data: CreateUserDto) {

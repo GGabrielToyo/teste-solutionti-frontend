@@ -1,5 +1,5 @@
 import { LogOut, MapPin, User } from "lucide-react"
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 
 import {
     Sidebar,
@@ -11,28 +11,8 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { TokenService } from "@/services/token-service"
 
-const handleLogout = () => {
-    console.log("Logging out...");
-}
-
-const items = [
-    {
-        title: "Address",
-        url: "/",
-        icon: MapPin,
-    },
-    {
-        title: "Profile",
-        url: "/profile",
-        icon: User,
-    },
-    {
-        title: "Exit",
-        onClick: handleLogout,
-        icon: LogOut,
-    }
-]
 
 export function AppSidebar() {
     const useLocationSafe = () => {
@@ -42,6 +22,31 @@ export function AppSidebar() {
             return { pathname: "/" }
         }
     }
+
+    const navigate = useNavigate()
+
+    const handleLogout = () => {
+        TokenService.removeToken()
+        navigate("/auth")
+    }
+
+    const items = [
+        {
+            title: "Address",
+            url: "/",
+            icon: MapPin,
+        },
+        {
+            title: "Profile",
+            url: "/profile",
+            icon: User,
+        },
+        {
+            title: "Exit",
+            onClick: handleLogout,
+            icon: LogOut,
+        }
+    ]
 
     const location = useLocationSafe()
 
