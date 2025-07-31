@@ -70,7 +70,7 @@ export function DataTable<TData, TValue>({
     })
 
     return (
-        <div className="w-full p-2">
+        <div className="w-full p-0 sm:p-2">
             <div className="flex items-center mb-2">
                 <Input
                     placeholder="Filter cities..."
@@ -107,7 +107,7 @@ export function DataTable<TData, TValue>({
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>
-            <div className="overflow-hidden rounded-md border">
+            <div className="overflow-x-auto w-full max-w-[329px] sm:max-w-none rounded-md border">
                 <Table>
                     <TableHeader>
                         {table.getHeaderGroups().map((headerGroup) => (
