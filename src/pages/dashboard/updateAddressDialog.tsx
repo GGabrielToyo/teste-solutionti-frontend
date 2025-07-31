@@ -48,37 +48,36 @@ export function UpdateAddressDialog({ address, onUpdate, children }: UpdateAddre
     } = useForm<UpdateAddressFormData>({
         resolver: zodResolver(updateAddressSchema),
         defaultValues: {
-            zipCode: "",
+            zipCode: address.zipCode || "",
             street: address.street || "",
-            complement: "",
-            unit: "",
+            complement: address.complement || "",
+            unit: address.unit || "",
             district: address.district || "",
             city: address.city || "",
-            stateAbbr: "",
+            stateAbbr: address.stateAbbr || "",
             region: address.region || "",
-            ibgeCode: "",
-            giaCode: "",
-            areaCode: "",
-            siafiCode: "",
+            ibgeCode: address.ibgeCode || "",
+            giaCode: address.giaCode || "",
+            areaCode: address.areaCode || "",
+            siafiCode: address.siafiCode || "",
         }
     })
 
-    // Resetar form quando abrir o dialog
     useEffect(() => {
         if (isOpen) {
             reset({
-                zipCode: "",
+                zipCode: address.zipCode || "",
                 street: address.street || "",
-                complement: "",
-                unit: "",
+                complement: address.complement || "",
+                unit: address.unit || "",
                 district: address.district || "",
                 city: address.city || "",
-                stateAbbr: "",
+                stateAbbr: address.stateAbbr || "",
                 region: address.region || "",
-                ibgeCode: "",
-                giaCode: "",
-                areaCode: "",
-                siafiCode: "",
+                ibgeCode: address.ibgeCode || "",
+                giaCode: address.giaCode || "",
+                areaCode: address.areaCode || "",
+                siafiCode: address.siafiCode || "",
             })
         }
     }, [isOpen, address, reset])
