@@ -18,8 +18,8 @@ const profileSchema = z.object({
     name: z.string().min(1, "Nome é obrigatório"),
     email: z.string().email("Email inválido"),
     cpf: z.string().min(11, "CPF deve ter 11 dígitos").optional(),
-    password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").optional(),
-    passwordConfirmation: z.string().min(6, "Confirmação de senha deve ter pelo menos 6 caracteres").optional()
+    password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres").or(z.literal("")),
+    passwordConfirmation: z.string().min(6, "Confirmação de senha deve ter pelo menos 6 caracteres").or(z.literal(""))
 })
 
 type ProfileFormData = z.infer<typeof profileSchema>

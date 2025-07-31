@@ -39,7 +39,7 @@ export const UserService = {
     },
 
     update: async (user: UpdateUserDto) => {
-        const response = await api.put(`/user/${user.id}`, user)
+        const response = await api.put(`/user/update`, user)
 
         if (!response.data) {
             throw new Error("Failed to update user")
