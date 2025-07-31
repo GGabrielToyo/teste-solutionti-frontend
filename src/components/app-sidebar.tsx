@@ -52,7 +52,7 @@ export function AppSidebar() {
 
     return (
         <Sidebar>
-            <SidebarContent>
+            <SidebarContent className="bg-background/95 backdrop-blur-sm md:bg-transparent md:backdrop-blur-none">
                 <SidebarGroup>
                     <SidebarGroupLabel>Solution App</SidebarGroupLabel>
                     <SidebarGroupContent>
