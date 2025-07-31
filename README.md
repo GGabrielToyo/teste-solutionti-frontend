@@ -2,6 +2,7 @@
 
 Aplicação frontend desenvolvida para teste tecnico da empresa Solution TI. Responsável por lidar com autenticação, visualização de dados e interação com os serviços da API.
 
+Aplicação esta rodando no servidor gratuito da vercel e pode ser acessado aqui -> [https://teste-solutionti-frontend.vercel.app/](https://teste-solutionti-frontend.vercel.app/)
 
 ## Stack utilizada
 
