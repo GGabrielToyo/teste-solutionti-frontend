@@ -4,14 +4,15 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useDocumentTitle } from "@/hooks/use-document-title";
-import { set, z } from "zod"
+import { z } from "zod"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import type { AuthDto, CreateUserDto, UserDto } from "@/interfaces/user-interface";
+import type { AuthDto, CreateUserDto } from "@/interfaces/user-interface";
 import { AuthService } from "@/services/auth-service";
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
+import { UserService } from "@/services/user-service";
 
 const signinSchema = z.object({
     email: z
@@ -100,6 +101,7 @@ export default function Auth() {
 
             const response = await AuthService.signin(authDto)
             login(response.data.token)
+            UserService.getUser()
             navigate('/')
             reset()
         } catch (error) {

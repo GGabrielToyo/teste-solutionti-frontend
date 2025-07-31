@@ -1,8 +1,24 @@
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { AppSidebar } from "@/components/app-sidebar"
 import { SiteHeader } from "./components/site-header"
+import { useLocation } from "react-router-dom"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+    const location = useLocation()
+    const getTitleByPath = (pathname: string) => {
+        const titleMap: Record<string, string> = {
+            '/': 'Dashboard de Endereços',
+            '/profile': 'Perfil do Usuário',
+            '/settings': 'Configurações',
+            '/users': 'Gerenciar Usuários',
+            '/reports': 'Relatórios'
+        }
+
+        return titleMap[pathname] || 'Sistema'
+    }
+
+    const currentTitle = getTitleByPath(location.pathname)
+
     return (
         <SidebarProvider
             style={
@@ -15,7 +31,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         >
             <AppSidebar />
             <main className="flex flex-1 flex-col">
-                <SiteHeader title="Dashboard de Endereços" />
+                <SiteHeader title={currentTitle} />
                 <div className="flex-1">
                     {children}
                 </div>

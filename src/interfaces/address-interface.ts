@@ -13,16 +13,16 @@ export interface AddressDto {
 export interface CreateAddressDto {
     zipCode: string,
     street: string,
-    complement: string,
-    unit: string,
+    complement: string | undefined,
+    unit: string | undefined,
     district: string,
     city: string,
     stateAbbr: string,
     region: string
-    ibgeCode: string,
-    giaCode: string,
-    areaCode: string,
-    siafiCode: string,
+    ibgeCode: string | undefined,
+    giaCode: string | undefined,
+    areaCode: string | undefined,
+    siafiCode: string | undefined,
     userId: string
 }
 

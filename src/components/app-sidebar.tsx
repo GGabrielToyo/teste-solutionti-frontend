@@ -11,7 +11,7 @@ import {
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { TokenService } from "@/services/token-service"
+import { UserService } from "@/services/user-service"
 
 
 export function AppSidebar() {
@@ -26,7 +26,7 @@ export function AppSidebar() {
     const navigate = useNavigate()
 
     const handleLogout = () => {
-        TokenService.removeToken()
+        UserService.logout()
         navigate("/auth")
     }
 
