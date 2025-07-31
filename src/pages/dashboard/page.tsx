@@ -3,7 +3,7 @@ import { columns } from "./columns"
 import { DataTable } from "./data-table"
 import { useDocumentTitle } from "@/hooks/use-document-title"
 import { AddressService } from "@/services/address-service"
-import type { AddressDto, AddressDtoList, CreateAddressDto } from "@/interfaces/address-interface"
+import type { AddressDto, AddressDtoList, CreateAddressDto, UpdateAddressDto } from "@/interfaces/address-interface"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
 import { ChevronsUpDown, RefreshCcw } from "lucide-react"
@@ -91,6 +91,27 @@ export default function Page() {
         }
     }, [user, refetchAddresses])
 
+    const handleDeleteAddress = async (addressId: string) => {
+        try {
+            await AddressService.delete(addressId)
+            await refetchAddresses()
+
+        } catch (error) {
+            console.error('Erro ao deletar endereço:', error)
+        }
+    }
+
+    const handleUpdateAddress = async (data: UpdateAddressDto) => {
+        try {
+            await AddressService.update(data)
+            await refetchAddresses()
+            console.log('Endereço atualizado com sucesso!')
+        } catch (error) {
+            console.error('Erro ao atualizar endereço:', error)
+            throw error
+        }
+    }
+
     return (
         <>
             <Collapsible className="mt-4 text-left" open={isCollapsibleOpen} onOpenChange={setIsCollapsibleOpen}>
@@ -103,7 +124,7 @@ export default function Page() {
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <Button className="mr-2" variant="outline" size="icon" onClick={() => { refetchAddresses() }}>
+                                <Button className="" variant="outline" size="icon" onClick={() => { refetchAddresses() }}>
                                     <RefreshCcw />
                                 </Button>
                             </TooltipTrigger>
@@ -145,7 +166,7 @@ export default function Page() {
                 )}
 
                 {!loading && !error && (
-                    <DataTable columns={columns} data={addresses} />
+                    <DataTable columns={columns(handleDeleteAddress, handleUpdateAddress)} data={addresses} />
                 )}
             </div>
         </>

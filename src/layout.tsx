@@ -9,9 +9,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         const titleMap: Record<string, string> = {
             '/': 'Dashboard de Endereços',
             '/profile': 'Perfil do Usuário',
-            '/settings': 'Configurações',
-            '/users': 'Gerenciar Usuários',
-            '/reports': 'Relatórios'
         }
 
         return titleMap[pathname] || 'Sistema'

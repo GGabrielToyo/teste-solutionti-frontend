@@ -119,3 +119,9 @@
   color: white !important;
   border-color: rgb(75 85 99) !important;
 }
+
+[data-slot="dialog-content"] {
+  background-color: rgb(107 114 128) !important;
+  color: white !important;
+  border-color: rgb(75 85 99) !important;
+}

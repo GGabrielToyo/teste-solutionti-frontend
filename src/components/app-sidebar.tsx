@@ -32,17 +32,17 @@ export function AppSidebar() {
 
     const items = [
         {
-            title: "Address",
+            title: "Endereços",
             url: "/",
             icon: MapPin,
         },
         {
-            title: "Profile",
+            title: "Perfil",
             url: "/profile",
             icon: User,
         },
         {
-            title: "Exit",
+            title: "Sair",
             onClick: handleLogout,
             icon: LogOut,
         }

@@ -1,4 +1,4 @@
-import type { AddressDtoList, CreateAddressDto } from "@/interfaces/address-interface";
+import type { AddressDtoList, CreateAddressDto, UpdateAddressDto } from "@/interfaces/address-interface";
 import type { UserDto } from "@/interfaces/user-interface";
 import { api } from "@/lib/axios";
 import { UserService } from "./user-service";
@@ -27,6 +27,26 @@ export const AddressService = {
 
         if (!response.data) {
             throw new Error("Erro ao cadastrar endereço");
+        }
+
+        return response.data;
+    },
+
+    async delete(id: string) {
+        const response = await api.delete(`/address/${id}`);
+
+        if (!response) {
+            throw new Error("Erro ao excluir endereço");
+        }
+
+        return response.data;
+    },
+
+    async update(address: UpdateAddressDto) {
+        const response = await api.put("/address/update", address);
+
+        if (!response.data) {
+            throw new Error("Erro ao atualizar endereço");
         }
 
         return response.data;

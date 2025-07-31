@@ -29,6 +29,7 @@ import {
 import { Input } from "@/components/ui/input"
 import React from "react"
 import { ChevronDown } from "lucide-react"
+import { columnPipe } from '@/utils/pipes/column-pipe'
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[]
@@ -82,7 +83,7 @@ export function DataTable<TData, TValue>({
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
-                            Columns <ChevronDown />
+                            Colunas <ChevronDown />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -99,7 +100,7 @@ export function DataTable<TData, TValue>({
                                             column.toggleVisibility(!!value)
                                         }
                                     >
-                                        {column.id}
+                                        {columnPipe(column.id)}
                                     </DropdownMenuCheckboxItem>
                                 )
                             })}
@@ -153,7 +154,7 @@ export function DataTable<TData, TValue>({
             <div className="flex items-center justify-between space-x-2 py-4">
                 <div className="text-muted-foreground text-sm">
                     {table.getFilteredSelectedRowModel().rows.length} of{" "}
-                    {table.getFilteredRowModel().rows.length} row(s) selected.
+                    {table.getFilteredRowModel().rows.length} linha(s) selecionada(s).
                 </div>
                 <div className="space-x-2">
                     <Button
