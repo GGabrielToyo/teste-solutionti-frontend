@@ -14,7 +14,17 @@ export interface CreateUserDto {
 export interface UserDto {
     id: string,
     name: string,
+    email: string,
     cpf: string,
     role: string,
     createdAt: Date
+}
+
+export interface UpdateUserDto {
+    id: string,
+    name: string,
+    email: string,
+    cpf?: string,
+    password?: string,
+    passwordConfirmation?: string
 }

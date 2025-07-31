@@ -128,7 +128,7 @@ export function UpdateAddressDialog({ address, onUpdate, children }: UpdateAddre
             }
 
             await onUpdate(updateData)
-            setIsOpen(false) // Fechar dialog após sucesso
+            setIsOpen(false)
 
         } catch (error) {
             setSubmitError(error instanceof Error ? error.message : 'Erro ao atualizar endereço')

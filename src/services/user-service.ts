@@ -1,4 +1,4 @@
-import type { UserDto } from "@/interfaces/user-interface"
+import type { UpdateUserDto, UserDto } from "@/interfaces/user-interface"
 import { api } from "@/lib/axios"
 import Cookies from 'js-cookie'
 import { TokenService } from "./token-service";
@@ -22,6 +22,8 @@ export const UserService = {
 
         const user: UserDto = response.data
         Cookies.set(USER_KEY, JSON.stringify(user), cookieOptions);
+
+        return user
     },
 
     getUserById: async (id: string) => {
@@ -34,6 +36,19 @@ export const UserService = {
         console.log("User fetched:", user)
 
         return response.data
+    },
+
+    update: async (user: UpdateUserDto) => {
+        const response = await api.put(`/user/${user.id}`, user)
+
+        if (!response.data) {
+            throw new Error("Failed to update user")
+        }
+
+        const updatedUser: UserDto = response.data
+        Cookies.set(USER_KEY, JSON.stringify(updatedUser), cookieOptions);
+
+        return updatedUser
     },
 
     getUserByCookies: () => {

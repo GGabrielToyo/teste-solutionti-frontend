@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from "@/hooks/use-auth";
 import { useState } from "react";
 import { UserService } from "@/services/user-service";
+import { Loader2 } from "lucide-react";
 
 const signinSchema = z.object({
     email: z
@@ -184,7 +185,7 @@ export default function Auth() {
 
                                 <CardFooter>
                                     <Button type="submit" disabled={isSubmitting || !isValid}>
-                                        {isSubmitting ? "Entrando..." : "Entrar"}
+                                        {isSubmitting ? <div className="flex"><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Entrando...</div> : "Entrar"}
                                     </Button>
                                 </CardFooter>
                             </form>
@@ -274,7 +275,7 @@ export default function Auth() {
 
                                 <CardFooter>
                                     <Button type="submit" disabled={isSubmittingSignup || !isValidSignup}>
-                                        {isSubmittingSignup ? "Cadastrando..." : "Cadastrar"}
+                                        {isSubmittingSignup ? <div className="flex"><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Cadastrando...</div> : "Cadastrar"}
                                     </Button>
                                 </CardFooter>
                             </form>

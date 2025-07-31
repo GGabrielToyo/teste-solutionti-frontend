@@ -6,7 +6,7 @@ import { AddressService } from "@/services/address-service"
 import type { AddressDto, AddressDtoList, CreateAddressDto, UpdateAddressDto } from "@/interfaces/address-interface"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
-import { ChevronsUpDown, RefreshCcw } from "lucide-react"
+import { ChevronsUpDown, Loader2, RefreshCcw } from "lucide-react"
 import { AddressForm } from "./addressForm"
 import { UserService } from "@/services/user-service"
 import type { UserDto } from "@/interfaces/user-interface"
@@ -105,7 +105,6 @@ export default function Page() {
         try {
             await AddressService.update(data)
             await refetchAddresses()
-            console.log('Endereço atualizado com sucesso!')
         } catch (error) {
             console.error('Erro ao atualizar endereço:', error)
             throw error
@@ -154,7 +153,10 @@ export default function Page() {
             <div className="container mx-auto py-10 bg-background text-foreground">
                 {(loading && userLoading) && (
                     <div>
-                        Carregando endereços...
+                        <div className="flex items-center">
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Carregando endereços...
+                        </div>
                         <Skeleton className="w-full h-25 rounded-md bg-gray-300 mt-5" />
                     </div>
                 )}
