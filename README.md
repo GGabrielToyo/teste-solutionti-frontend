@@ -1,69 +1,45 @@
 # React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação frontend desenvolvida para teste tecnico da empresa Solution TI. Responsável por lidar com autenticação, visualização de dados e interação com os serviços da API.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Stack utilizada
 
-## Expanding the ESLint configuration
+**Front-end:** React 19, Vite, Tailwind CSS, Axios, TypeScript
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Instalação
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Clone o projeto
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+  git clone https://github.com/GGabrielToyo/teste-solutionti-backend
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Instale as dependências
+```bash
+  npm install
 ```
+
+
+## Rodando localmente
+
+Inicie o servidor de desenvolvimento
+
+```bash
+   npm run dev
+```
+
+## Variáveis de ambiente
+
+VITE_API_URL=http://localhost:8080
+
+## Funcionalidades
+- Autenticação via email e senha
+- Armazenamento de Token JWT nos Cookies
+- Redirecionamento automático para a rota original após login
+- Integração com API ViaCEP
+- Integração com Backend para as funcionalidades descritas
+
+## Autores
+
+- [Gabriel Toyo](https://github.com/GGabrielToyo)
